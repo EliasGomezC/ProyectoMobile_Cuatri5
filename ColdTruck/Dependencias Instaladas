@@ -9,3 +9,5 @@ npm install @react-navigation/bottom-tabs
 npx expo install react-dom react-native-web
 
 npx expo install @expo/metro-runtime
+
+npm install bcrypt

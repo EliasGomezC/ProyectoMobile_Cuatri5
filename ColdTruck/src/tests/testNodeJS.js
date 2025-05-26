@@ -10,7 +10,7 @@ const testScreen = () => {
     const obtenerUsuarios = async () => {
         setLoading(true);
         try {
-            const res = await fetch('http://172.18.3.118:3000/users');
+            const res = await fetch('http://192.168.1.115:3000/users');
             const data = await res.json();
             setUsuarios(data);
             setError('');

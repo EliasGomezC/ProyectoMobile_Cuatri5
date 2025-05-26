@@ -1,53 +1,83 @@
-import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  const [form, setForm] = useState({ name: '', password: '' });
+  const [form, setForm] = useState({
+    email: '',
+    password: ''
+  });
 
-  const handleLogin = async () => {
-    try {
-      // Lógica de autenticación aquí
-    } catch (error) {
-      console.log(error);
+const handleLogin = async () => {
+  if (!form.email || !form.password) {
+    alert('Por favor ingresa email y contraseña');
+    return;
+  }
+
+  try {
+    const response = await fetch('http://192.168.1.115:3000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: form.email,
+        password: form.password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      const usuario = data.user;
+
+      if (usuario.role === 'Administrator') {
+        navigation.navigate('HomeTabs', { role: 'Administrator' });
+      } else if (usuario.role === 'Driver') {
+        navigation.navigate('HomeTabs', { role: 'Driver' });
+      } else {
+        alert('Rol de usuario no reconocido');
+      }
+    } else {
+      alert(data.error || 'Error al iniciar sesión');
     }
-  };
+  } catch (error) {
+    console.error('Error en login:', error);
+    alert('Error de red o servidor');
+  }
+};
+
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image source={require('../../images/logo.jpg')} style={styles.logo} />
 
-      {/* Título y slogan */}
       <Text style={styles.brandTitle}>ColdTruck</Text>
       <Text style={styles.slogan}>Refrigerated trailer transport monitoring and management system</Text>
 
-      {/* Inputs */}
-      <TextInput
-        style={styles.input}
-        placeholder="Username"
-        placeholderTextColor="#1B5574"
-        onChangeText={(name) => setForm({ ...form, name })}
-        value={form.name}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#1B5574"
-        secureTextEntry
-        onChangeText={(password) => setForm({ ...form, password })}
-        value={form.password}
-      />
+      <View style={{width: '100%'}}>
+          <Text style={styles.inputLabel}>Email address</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="ColdTruck@gmail.com"
+            placeholderTextColor="#1B5574"
+            onChangeText={(email) => setForm({ ...form, email })}
+            value={form.email}
+          />
+          <Text style={styles.inputLabel}>Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="********"
+            placeholderTextColor="#1B5574"
+            secureTextEntry
+            onChangeText={(password) => setForm({ ...form, password })}
+            value={form.password}
+          />
+      </View>
 
-      {/* Botón de Login */}
       <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
-        <Text style={styles.loginText}>Login</Text>
+        <Text style={styles.loginText}>Sign In</Text>
       </TouchableOpacity>
 
-      {/* Navegación extra */}
-      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-        <Text style={styles.linkText}>Create Account</Text>
-      </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('HomeTabs', { role: 'Driver' })}>
         <Text style={styles.linkText}>Enter as Driver</Text>
       </TouchableOpacity>
@@ -62,9 +92,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#e3f6fd', // Fondo tipo cielo frío
     alignItems: 'center',
-    justifyContent: 'start',
-    paddingTop: 120,
-    padding: 30,
+    paddingTop: 100,
+    padding: 20,
     height: '100%',
   },
   logo: {
@@ -85,7 +114,7 @@ const styles = StyleSheet.create({
   slogan: {
     fontSize: 14,
     color: '#1B5574',
-    marginBottom: 30,
+    marginBottom: 10,
     textAlign: 'center',
   },
   input: {
@@ -99,13 +128,20 @@ const styles = StyleSheet.create({
     color: '#0E415C',
     fontSize: 15,
   },
+  inputLabel: {
+    fontSize: 17,
+    fontWeight: '600',
+    color: '#222',
+    marginBottom: 8,
+    justifyContent: 'start',
+  },
   loginBtn: {
     backgroundColor: '#0E415C',
     paddingVertical: 14,
     borderRadius: 30,
     alignItems: 'center',
     width: '100%',
-    marginTop: 10,
+    marginTop: 0,
   },
   loginText: {
     color: '#ffffff',

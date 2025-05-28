@@ -25,6 +25,9 @@ import adminRoutesScreen from './src/screens/administrator/routes';
 import adminTrucksScreen from './src/screens/administrator/trucks';
 import adminDriverScreen from './src/screens/administrator/users';
 
+  // test
+import mapScreen from './src/tests/mapScreen';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -75,6 +78,8 @@ const HomeTabs = ({ route }) => {
               iconName = focused ? 'bus' : 'bus-outline';
             } else if (route.name === 'Notifications') {
               iconName = focused ? 'notifications' : 'notifications-outline';
+            } else if (route.name === 'Map') {
+              iconName = focused ? 'map' : 'map-outline';
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -100,6 +105,7 @@ const HomeTabs = ({ route }) => {
         <>
         <Tab.Screen name="Home" component={adminHomeScreen} />
         <Tab.Screen name="Routes" component={adminRoutesScreen} />
+        <Tab.Screen name="Map" component={mapScreen} />
         <Tab.Screen name="Users" component={adminDriverScreen} />
         <Tab.Screen name="Trucks" component={adminTrucksScreen} />
         <Tab.Screen name="Notifications" component={adminNotificationsScreen} />

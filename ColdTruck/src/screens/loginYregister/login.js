@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import conexion from '../../../conexion';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -16,7 +17,7 @@ const handleLogin = async () => {
   }
 
   try {
-    const response = await fetch('http://192.168.1.115:3000/login', {
+    const response = await fetch(`http://${conexion}:3000/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

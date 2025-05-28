@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import conexion from '../../../conexion';
 
 const registerScreen = () => {
     const navigation = useNavigation();
@@ -22,7 +23,7 @@ const registerScreen = () => {
     }
 
     try {
-        const response = await fetch('http://192.168.1.115:3000/users', {
+        const response = await fetch(`http://${conexion}:3000/users`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

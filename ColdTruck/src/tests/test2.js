@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Alert, RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import conexion from '../../conexion';
 
 const test2Screen = () => {
     const [usuarios, setUsuarios] = useState([]);
@@ -10,7 +11,7 @@ const test2Screen = () => {
     const obtenerUsuarios = async () => {
         setLoading(true);
         try {
-            const res = await fetch('http://192.168.1.115:3000/users');
+            const res = await fetch(`http://${conexion}:3000/users`);
             const data = await res.json();
             setUsuarios(data);
             setError('');

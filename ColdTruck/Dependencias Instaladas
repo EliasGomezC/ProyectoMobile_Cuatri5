@@ -11,3 +11,9 @@ npx expo install react-dom react-native-web
 npx expo install @expo/metro-runtime
 
 npm install bcrypt
+
+npm install react-leaflet leaflet // No se usa, solo es para web pero no lo implemente
+
+npx expo install react-native-maps
+
+npx expo install expo-location

@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: '800',
-        color: '#0E415C'
+        color: '#046bc8'
     },
     floatingButton: {
         position: "absolute",
         bottom: 20,
         right: 10,
-        backgroundColor: "#0E415C",
+        backgroundColor: "#046bc8",
         width: 60,
         height: 60,
         borderRadius: 30,

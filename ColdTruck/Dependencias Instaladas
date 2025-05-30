@@ -17,3 +17,5 @@ npm install react-leaflet leaflet // No se usa, solo es para web pero no lo impl
 npx expo install react-native-maps
 
 npx expo install expo-location
+
+npx expo install @react-native-async-storage/async-storage

@@ -39,9 +39,8 @@ const adminRoutesScreen = () => {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                     <TouchableOpacity onPress={() => setModalVisiblePlus(false)} style={{ alignSelf: 'flex-end' }}>
-                        <AntDesign name="closecircle" size={24} color="#0E415C" />
+                        <AntDesign name="closecircle" size={24} color="#09569c" />
                     </TouchableOpacity>
-                    
                         <Text>Ola</Text>
                     </View>
                 </View>
@@ -60,13 +59,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: '800',
-        color: '#0E415C'
+        color: '#046bc8'
     },
     floatingButton: {
         position: "absolute",
         bottom: 20,
         right: 10,
-        backgroundColor: "#0E415C",
+        backgroundColor: "#046bc8",
         width: 60,
         height: 60,
         borderRadius: 30,
@@ -98,12 +97,11 @@ const styles = StyleSheet.create({
     },
     filterButton: {
         marginLeft: 10,
-        backgroundColor: '#0E415C',
+        backgroundColor: '#046bc8',
         padding: 10,
         borderRadius: 20,
     },
     modalContainer: {
-        flex: 1,
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.5)',
     },

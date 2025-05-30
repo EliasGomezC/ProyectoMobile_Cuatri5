@@ -2,9 +2,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState, useEffect } from 'react';
 
 // Pantallas
   // shared
@@ -32,10 +33,28 @@ import mapScreen from './src/tests/mapScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+
 // Componente con las Tabs según el rol
 const HomeTabs = ({ route }) => {
   const { role } = route.params;
   const navigation = useNavigation();
+
+  const [usuario, setUsuario] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await AsyncStorage.getItem('userData');
+        if (userData) {
+          setUsuario(JSON.parse(userData));
+        }
+      } catch (error) {
+        console.error('Error al leer usuario:', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   return (
       <Tab.Navigator
@@ -44,16 +63,20 @@ const HomeTabs = ({ route }) => {
           headerRight: () => {
             return (
               <TouchableOpacity style={styles.userIcon} onPress={() => navigation.navigate("Profile")}>
-                <Ionicons name="person-circle-outline" size={32} color="white" />
+                {usuario?.image ? (
+                  <Image source={{ uri: usuario.image }} style={{height:40, width: 40}} />
+                ) : (
+                  <Ionicons name="person-circle-outline" size={40} color="white" />
+                )}
               </TouchableOpacity>
             );
           },
           headerStyle: {
-              backgroundColor: "#0E415C",
-              height: 80,
+              backgroundColor: "#046bc8",
+              height: 90,
           },
-          tabBarActiveTintColor: '#0E415C',
-          tabBarInactiveTintColor: '#0E415C',
+          tabBarActiveTintColor: '#046bc8',
+          tabBarInactiveTintColor: '#046bc8',
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
               //Driver
@@ -135,8 +158,8 @@ export default function App() {
           headerShown: true,
           headerTitle: '',
           headerStyle: {
-              backgroundColor: "#0E415C",
-              height: 80,
+              backgroundColor: "#046bc8",
+              height: 90,
           },
           headerTintColor: "#fff",
         }}/>

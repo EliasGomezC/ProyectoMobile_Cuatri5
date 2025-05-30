@@ -1,6 +1,7 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useState } from 'react';
 import { Modal, RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import conexion from '../../../conexion';
 
 const adminDriverScreen = () => {
     const [loading, setLoading] = useState(false);
@@ -11,6 +12,8 @@ const adminDriverScreen = () => {
         email: '',
         password: '123456789',
         phoneNumber: '',
+        status: 'no route',
+        image: 'https://i.pinimg.com/564x/8d/ff/49/8dff49985d0d8afa53751d9ba8907aed.jpg',
         role: 'Driver' // valor por defecto
     });
 
@@ -23,7 +26,7 @@ const adminDriverScreen = () => {
     }
 
     try {
-        const response = await fetch('http://192.168.1.115:3000/users', {
+        const response = await fetch(`http://${conexion}:3000/users`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +70,7 @@ const adminDriverScreen = () => {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <TouchableOpacity onPress={() => setModalVisible(false)} style={{ alignSelf: 'flex-end' }}>
-                            <AntDesign name="closecircle" size={24} color="#0E415C" />
+                            <AntDesign name="closecircle" size={24} color="#09569c" />
                         </TouchableOpacity>
                         <Text style={styles.brandTitle}>Register people</Text>
                         <View style={{width:'100%'}}>
@@ -81,9 +84,7 @@ const adminDriverScreen = () => {
                                             value={formData.name}
                                             onChangeText={(text) => setFormData({...formData, name: text})}
                                         />
-                                    </View>
-                                
-            
+                                </View>
                                 <View style={styles.inputContainer}>
                                     <Text style={styles.label}>Last Name*</Text>
                                         <TextInput
@@ -147,18 +148,18 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         height: '100%',
         backgroundColor: '#e3f6fd',
-        position: 'relative', // <--- esto
+        position: 'relative',
     },
     title: {
         fontSize: 20,
         fontWeight: '800',
-        color: '#0E415C'
+        color: '#046bc8'
     },
     floatingButton: {
         position: "absolute",
         bottom: 20,
         right: 10,
-        backgroundColor: "#0E415C",
+        backgroundColor: "#046bc8",
         width: 60,
         height: 60,
         borderRadius: 30,
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 15,
         padding: 20,
-        paddingTop: 25,
+        paddingTop: 15,
         paddingBottom: 25,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -192,46 +193,46 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#ffffffcc',
-        borderColor: '#0E415C',
+        borderColor: '#046bc8',
         borderWidth: 1,
         borderRadius: 12,
         padding: 14,
         width: '100%',
         marginBottom: 15,
-        color: '#0E415C',
+        color: '#046bc8',
         fontSize: 15,
     },
     namesInput: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        gap: 10,
     },
     inputName: {
         flex: 1,
         backgroundColor: '#ffffffcc',
-        borderColor: '#0E415C',
+        borderColor: '#046bc8',
         borderWidth: 1,
         borderRadius: 12,
         padding: 14,
         width: '100%',
         marginBottom: 15,
-        color: '#0E415C',
+        color: '#046bc8',
         fontSize: 15,
     },
     lastNameInput: {
         flex: 1,
         backgroundColor: '#ffffffcc',
-        borderColor: '#0E415C',
+        borderColor: '#046bc8',
         borderWidth: 1,
         borderRadius: 12,
         padding: 14,
         width: '100%',
         marginBottom: 15,
-        color: '#0E415C',
+        color: '#046bc8',
         fontSize: 15,
     },
     inputContainer: {
         flex: 1,
-        marginHorizontal: 5,
         height: '100%',
         minWidth:'%48',
         marginBottom: 20,
@@ -244,7 +245,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
     },
     linkText: {
-        color: '#0E415C',
+        color: '#046bc8',
         fontSize: 16,
         marginTop: 10,
         justifyContent: 'center',
@@ -252,12 +253,12 @@ const styles = StyleSheet.create({
     brandTitle: {
         fontSize: 32,
         fontWeight: 'bold',
-        color: '#0E415C',
+        color: '#09569c',
         marginBottom: 24,
         textAlign: 'center',
     },
     registerBtn: {
-        backgroundColor: '#0E415C',
+        backgroundColor: '#046bc8',
         paddingVertical: 14,
         borderRadius: 30,
         alignItems: 'center',
@@ -280,13 +281,13 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 8,
         borderWidth: 1,
-        borderColor: '#0E415C',
+        borderColor: '#046bc8',
         backgroundColor: 'white',
         alignItems: 'center',
     },
     roleButtonActive: {
-        backgroundColor: '#53849A',
-        borderColor: '#0E415C',
+        backgroundColor: '#09569c',
+        borderColor: '#046bc8',
     },
     roleText: {
         color: '#666',

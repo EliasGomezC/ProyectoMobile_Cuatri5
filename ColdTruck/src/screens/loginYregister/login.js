@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -28,29 +29,29 @@ const handleLogin = async () => {
 
     const data = await response.json();
 
-    if (response.ok) {
-      const usuario = data.user;
+  if (response.ok) {
+    const usuario = data.user;
+    await AsyncStorage.setItem('userData', JSON.stringify(usuario));
 
-      if (usuario.role === 'Administrator') {
-        navigation.navigate('HomeTabs', { role: 'Administrator' });
-      } else if (usuario.role === 'Driver') {
-        navigation.navigate('HomeTabs', { role: 'Driver' });
-      } else {
-        alert('Rol de usuario no reconocido');
-      }
+    if (usuario.role === 'Administrator') {
+      navigation.navigate('HomeTabs', { role: 'Administrator' });
+      setForm({ email: '', password: '' });
+    } else if (usuario.role === 'Driver') {
+      navigation.navigate('HomeTabs', { role: 'Driver' });
+      setForm({ email: '', password: '' });
     } else {
-      alert(data.error || 'Error al iniciar sesión');
+      alert('Rol de usuario no reconocido');
     }
+  }
   } catch (error) {
     console.error('Error en login:', error);
     alert('Error de red o servidor');
   }
 };
 
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={require('../../images/logo.jpg')} style={styles.logo} />
+      <Image source={require('../../images/logoCold2.jpg')} style={styles.logo} />
 
       <Text style={styles.brandTitle}>ColdTruck</Text>
       <Text style={styles.slogan}>Refrigerated trailer transport monitoring and management system</Text>
@@ -103,24 +104,24 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#0E415C',
+    borderColor: '#046bc8',
   },
   brandTitle: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#0E415C',
+    color: '#046bc8',
     marginBottom: 4,
     textAlign: 'center',
   },
   slogan: {
     fontSize: 14,
-    color: '#1B5574',
+    color: '#046bc8',
     marginBottom: 10,
     textAlign: 'center',
   },
   input: {
     backgroundColor: '#ffffffcc',
-    borderColor: '#0E415C',
+    borderColor: '#046bc8',
     borderWidth: 1,
     borderRadius: 12,
     padding: 14,
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: 'start',
   },
   loginBtn: {
-    backgroundColor: '#0E415C',
+    backgroundColor: '#046bc8',
     paddingVertical: 14,
     borderRadius: 30,
     alignItems: 'center',
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   linkText: {
-    color: '#0E415C',
+    color: '#046bc8',
     fontSize: 16,
     marginTop: 10,
   },

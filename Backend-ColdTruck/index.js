@@ -21,6 +21,8 @@ const usuarioSchema = new mongoose.Schema({
     phoneNumber: String,
     email: String,
     password: String,
+    status: String,
+    image: String,
     role: String
 });
 
@@ -44,7 +46,7 @@ const saltRounds = 10;
 // Crear un nuevo usuario
 app.post('/users', async (req, res) => {
     try {
-        const { name, lastName, phoneNumber, email, password, role } = req.body;
+        const { name, lastName, phoneNumber, email, password, status, image, role } = req.body;
 
         const existingUser = await Usuario.findOne({ email });
         if (existingUser) {
@@ -59,6 +61,8 @@ app.post('/users', async (req, res) => {
             phoneNumber,
             email,
             password: hashedPassword,
+            status,
+            image,
             role
         });
 
@@ -99,6 +103,8 @@ app.post('/login', async (req, res) => {
                 name: usuario.name,
                 lastName: usuario.lastName,
                 email: usuario.email,
+                status: usuario.status,
+                image: usuario.image,
                 role: usuario.role
             }
         });

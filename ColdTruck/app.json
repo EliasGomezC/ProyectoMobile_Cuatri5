@@ -4,7 +4,7 @@
     "slug": "ColdTruck",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.jpg",
+    "icon": "./assets/logoCold2.jpg",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {

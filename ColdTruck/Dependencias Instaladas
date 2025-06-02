@@ -19,3 +19,7 @@ npx expo install react-native-maps
 npx expo install expo-location
 
 npx expo install @react-native-async-storage/async-storage
+
+npx expo install expo-sensors
+
+npx expo install expo-location @expo/vector-icons react-native-maps

@@ -1,33 +1,35 @@
 // App.js
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useState, useEffect } from 'react';
 
 // Pantallas
   // shared
-import profileScreen from './src/screens/shared/profile';
+import ProfileScreen from './src/screens/shared/profile';
 
   // driver
-import adminHomeScreen from './src/screens/administrator/home';
-import historyDriverScreen from './src/screens/driver/historyRoutes';
-import mainDriverScreen from './src/screens/driver/mainDriver';
-import notificationDriverScreen from './src/screens/driver/notificationDriver';
-import routeDriverScreen from './src/screens/driver/routeDriver';
+import AdminHomeScreen from './src/screens/administrator/home';
+import HistoryDriverScreen from './src/screens/driver/historyRoutes';
+import MainDriverScreen from './src/screens/driver/mainDriver';
+import NotificationDriverScreen from './src/screens/driver/notificationDriver';
+import RouteDriverScreen from './src/screens/driver/routeDriver';
 import LoginScreen from './src/screens/loginYregister/login';
 import RegisterScreen from './src/screens/loginYregister/register';
 
   // admin
-import adminNotificationsScreen from './src/screens/administrator/notifications';
-import adminRoutesScreen from './src/screens/administrator/routes';
-import adminTrucksScreen from './src/screens/administrator/trucks';
-import adminDriverScreen from './src/screens/administrator/users';
+import InsertRoutesScreen from './src/screens/administrator/insertRoutes';
+import AdminNotificationsScreen from './src/screens/administrator/notifications';
+import RegisterTrucksScreen from './src/screens/administrator/registerTrucks';
+import AdminRoutesScreen from './src/screens/administrator/routes';
+import AdminTrucksScreen from './src/screens/administrator/trucks';
+import AdminDriverScreen from './src/screens/administrator/users';
 
   // test
-import mapScreen from './src/tests/mapScreen';
+import MapScreen from './src/tests/mapScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -126,20 +128,20 @@ const HomeTabs = ({ route }) => {
       >
       {role === 'Administrator' && (
         <>
-        <Tab.Screen name="Home" component={adminHomeScreen} />
-        <Tab.Screen name="Routes" component={adminRoutesScreen} />
-        <Tab.Screen name="Map" component={mapScreen} />
-        <Tab.Screen name="Users" component={adminDriverScreen} />
-        <Tab.Screen name="Trucks" component={adminTrucksScreen} />
-        <Tab.Screen name="Notifications" component={adminNotificationsScreen} />
+        <Tab.Screen name="Home" component={AdminHomeScreen} />
+        <Tab.Screen name="Routes" component={AdminRoutesScreen} />
+        <Tab.Screen name="Map" component={MapScreen} />
+        <Tab.Screen name="Users" component={AdminDriverScreen} />
+        <Tab.Screen name="Trucks" component={AdminTrucksScreen} />
+        <Tab.Screen name="Notifications" component={AdminNotificationsScreen} />
         </>
       )}
       {role === 'Driver' && (
         <>
-          <Tab.Screen name='Main' component={mainDriverScreen}/>
-          <Tab.Screen name='Route' component={routeDriverScreen}/>
-          <Tab.Screen name='History' component={historyDriverScreen}/>
-          <Tab.Screen name='Notification' component={notificationDriverScreen}/>
+          <Tab.Screen name='Main' component={MainDriverScreen}/>
+          <Tab.Screen name='Route' component={RouteDriverScreen}/>
+          <Tab.Screen name='History' component={HistoryDriverScreen}/>
+          <Tab.Screen name='Notification' component={NotificationDriverScreen}/>
         </>
       )}
     </Tab.Navigator>
@@ -153,7 +155,27 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="HomeTabs" component={HomeTabs}/>
-        <Stack.Screen name="Profile" component={profileScreen}
+        <Stack.Screen name="Profile" component={ProfileScreen}
+          options={{
+          headerShown: true,
+          headerTitle: '',
+          headerStyle: {
+              backgroundColor: "#046bc8",
+              height: 90,
+          },
+          headerTintColor: "#fff",
+        }}/>
+        <Stack.Screen name="insertRoutes" component={InsertRoutesScreen}
+          options={{
+          headerShown: true,
+          headerTitle: '',
+          headerStyle: {
+              backgroundColor: "#046bc8",
+              height: 90,
+          },
+          headerTintColor: "#fff",
+        }}/>
+        <Stack.Screen name="registerTrucks" component={RegisterTrucksScreen}
           options={{
           headerShown: true,
           headerTitle: '',

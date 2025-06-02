@@ -1,10 +1,11 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { Modal, RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const adminRoutesScreen = () => {
-    const [modalVisiblePlus, setModalVisiblePlus] = useState(false);
+const AdminRoutesScreen = () => {
+    const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     return (
         <View style={styles.container}>
@@ -26,25 +27,9 @@ const adminRoutesScreen = () => {
                 <Text style={styles.title}>Routes Admins</Text>
             </ScrollView>
 
-            <TouchableOpacity style={styles.floatingButton} onPress={() => setModalVisiblePlus(true)}>
+            <TouchableOpacity style={styles.floatingButton} onPress={() => navigation.navigate('insertRoutes', { role: 'Administrator' })}>
                 <AntDesign name="plus" size={28} color="white" />
             </TouchableOpacity>
-
-            {/* MODAL */}
-            <Modal
-                visible={modalVisiblePlus}
-                animationType="fade"
-                transparent={true}
-            >
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                    <TouchableOpacity onPress={() => setModalVisiblePlus(false)} style={{ alignSelf: 'flex-end' }}>
-                        <AntDesign name="closecircle" size={24} color="#09569c" />
-                    </TouchableOpacity>
-                        <Text>Ola</Text>
-                    </View>
-                </View>
-            </Modal>
         </View>
     );
 };
@@ -121,4 +106,4 @@ const styles = StyleSheet.create({
     
 });
 
-export default adminRoutesScreen;
+export default AdminRoutesScreen;

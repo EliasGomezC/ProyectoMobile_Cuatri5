@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Alert, RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { RefreshControl, ScrollView, StyleSheet, Text } from 'react-native';
 
-const historyDriverScreen = () => {
+const HistoryDriverScreen = () => {
     const [loading, setLoading] = useState(false);
     return (
         <ScrollView
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default historyDriverScreen;
+export default HistoryDriverScreen;

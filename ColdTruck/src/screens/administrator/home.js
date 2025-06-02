@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, Text } from 'react-native';
 
-const adminHomeScreen = () => {
+const AdminHomeScreen = () => {
     const [loading, setLoading] = useState(false);
     return (
         <ScrollView
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default adminHomeScreen;
+export default AdminHomeScreen;

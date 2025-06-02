@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Alert, RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 
-const mainDriverScreen = () => {
+const MainDriverScreen = () => {
     const [loading, setLoading] = useState(false);
     return (
         <ScrollView
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default mainDriverScreen;
+export default MainDriverScreen;

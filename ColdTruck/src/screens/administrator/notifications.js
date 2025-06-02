@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, Text } from 'react-native';
 
-const adminNotificationsScreen = () => {
+const AdminNotificationsScreen = () => {
     const [loading, setLoading] = useState(false);
     return (
         <ScrollView
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default adminNotificationsScreen;
+export default AdminNotificationsScreen;

@@ -1,8 +1,10 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const adminTrucksScreen = () => {
+const AdminTrucksScreen = () => {
+    const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
     return (
         <View style={styles.container}>
@@ -14,7 +16,7 @@ const adminTrucksScreen = () => {
                 <Text style={styles.title}>Trucks Admins</Text>
             </ScrollView>
 
-            <TouchableOpacity style={styles.floatingButton}>
+            <TouchableOpacity style={styles.floatingButton} onPress={() => navigation.navigate('registerTrucks', { role: 'Administrator' })}>
                 <AntDesign name="plus" size={28} color="white" />
             </TouchableOpacity>
         </View>
@@ -52,4 +54,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default adminTrucksScreen;
+export default AdminTrucksScreen;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Modal, RefreshControl, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import conexion from '../../../conexion';
 
-const adminDriverScreen = () => {
+const AdminDriverScreen = () => {
     const [loading, setLoading] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
         const [formData, setFormData] = useState({
@@ -299,4 +299,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default adminDriverScreen;
+export default AdminDriverScreen;

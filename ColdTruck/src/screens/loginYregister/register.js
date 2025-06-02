@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import conexion from '../../../conexion';
 
-const registerScreen = () => {
+const RegisterScreen = () => {
     const navigation = useNavigation();
     const [formData, setFormData] = useState({
         name: '',
@@ -241,4 +241,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default registerScreen;
+export default RegisterScreen;

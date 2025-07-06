@@ -12,6 +12,7 @@ const LoginScreen = () => {
   });
 
 const handleLogin = async () => {
+  console.log("entrando");
   if (!form.email || !form.password) {
     alert('Por favor ingresa email y contraseña');
     return;
@@ -33,10 +34,10 @@ const handleLogin = async () => {
     const usuario = data.user;
     await AsyncStorage.setItem('userData', JSON.stringify(usuario));
 
-    if (usuario.role === 'Administrator') {
+    if (usuario.role === 'admin') {
       navigation.navigate('HomeTabs', { role: 'Administrator' });
       setForm({ email: '', password: '' });
-    } else if (usuario.role === 'Driver') {
+    } else if (usuario.role === 'driver') {
       navigation.navigate('HomeTabs', { role: 'Driver' });
       setForm({ email: '', password: '' });
     } else {

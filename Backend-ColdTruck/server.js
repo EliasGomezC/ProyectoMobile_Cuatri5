@@ -16,18 +16,27 @@ mongoose.connect('mongodb+srv://eliasgcueva:tomate24@0323106016.r9od6qy.mongodb.
 
 // 👉 PRIMERO define el esquema
 const usuarioSchema = new mongoose.Schema({
-    name: String,
-    lastName: String,
-    phoneNumber: String,
-    email: String,
-    password: String,
-    status: String,
-    image: String,
-    role: String
+    _id: { type: Number, unique: true },
+    name: { type: String, required: true },
+    lastName: { type: String, required: true },
+    secondLastName: { type: String },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
+    license: { type: String },
+    registrationDate: { type: Date, default: Date.now },
+    profilePicture: { type: String, required: true },
+    status: {
+        type: String,
+        enum: ["Available", "On Trip", "Unavailable", "Disabled"],
+        default: "Available",
+        required: true,
+    },
+    role: { type: String, enum: ["admin", "driver"], required: true },
 });
 
 // 👉 LUEGO crea el modelo
-const Usuario = mongoose.model('Usuario', usuarioSchema, 'users');
+const Usuario = mongoose.model('Usuario', usuarioSchema, 'user');
 
 // Obtener todos los usuarios
 app.get('/users', async (req, res) => {
@@ -56,14 +65,23 @@ app.post('/users', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const nuevoUsuario = new Usuario({
-            name,
-            lastName,
-            phoneNumber,
-            email,
-            password: hashedPassword,
-            status,
-            image,
-            role
+            _id: { type: Number, unique: true },
+            name: { type: String, required: true },
+            lastName: { type: String, required: true },
+            secondLastName: { type: String },
+            email: { type: String, required: true, unique: true },
+            password: { type: String, required: true },
+            phoneNumber: { type: String, required: true },
+            license: { type: String },
+            registrationDate: { type: Date, default: Date.now },
+            profilePicture: { type: String, required: true },
+            status: {
+                type: String,
+                enum: ["Available", "On Trip", "Unavailable", "Disabled"],
+                default: "Available",
+                required: true,
+            },
+            role: { type: String, enum: ["admin", "driver"], required: true }
         });
 
         await nuevoUsuario.save();
@@ -102,9 +120,14 @@ app.post('/login', async (req, res) => {
                 id: usuario._id,
                 name: usuario.name,
                 lastName: usuario.lastName,
+                secondLastName: usuario.secondLastName,
                 email: usuario.email,
+                password: usuario.password,
+                phoneNumber: usuario.phoneNumber,
+                license: usuario.license,
+                registrationDate: usuario.registrationDate,
                 status: usuario.status,
-                image: usuario.image,
+                profilePicture: usuario.profilePicture,
                 role: usuario.role
             }
         });

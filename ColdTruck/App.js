@@ -65,8 +65,8 @@ const HomeTabs = ({ route }) => {
           headerRight: () => {
             return (
               <TouchableOpacity style={styles.userIcon} onPress={() => navigation.navigate("Profile")}>
-                {usuario?.image ? (
-                  <Image source={{ uri: usuario.image }} style={{height:40, width: 40}} />
+                {usuario?.profilePicture ? (
+                  <Image source={{ uri: usuario.profilePicture }} style={{height:50, width: 50, borderRadius: 40, borderColor: "white", borderWidth: 1.5}} />
                 ) : (
                   <Ionicons name="person-circle-outline" size={40} color="white" />
                 )}
@@ -75,7 +75,7 @@ const HomeTabs = ({ route }) => {
           },
           headerStyle: {
               backgroundColor: "#046bc8",
-              height: 90,
+              height: 100,
           },
           tabBarActiveTintColor: '#046bc8',
           tabBarInactiveTintColor: '#046bc8',

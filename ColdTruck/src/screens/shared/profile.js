@@ -64,25 +64,25 @@ const ProfileScreen = () => {
             {usuario.name} {usuario.lastName} {usuario.secondLastName}
             </Text>
             <Text style={styles.role}>
-              {usuario.role === 'admin' ? 'Administrator' : 'Driver'}
+                {usuario.role === 'admin' ? 'Administrator' : 'Driver'}
             </Text>
         </View>
 
         <View style={styles.card}>
             <IconRow icon={<MaterialIcons name="email" size={20} color="#0E415C" />} label="Email" value={usuario.email} />
             <IconRow icon={<Feather name="phone" size={20} color="#0E415C" />} label="Phone Number" value={usuario.phoneNumber} />
-            <IconRow icon={<FontAwesome5 name="id-card" size={20} color="#0E415C" />} label="Estado" value={usuario.status} />
-            <IconRow icon={<MaterialIcons name="date-range" size={20} color="#0E415C" />} label="Registrado" value={new Date(usuario.registrationDate).toLocaleDateString()} />
+            <IconRow icon={<FontAwesome5 name="id-card" size={20} color="#0E415C" />} label="Status" value={usuario.status} />
+            <IconRow icon={<MaterialIcons name="date-range" size={20} color="#0E415C" />} label="Registered Date" value={new Date(usuario.registrationDate).toLocaleDateString()} />
         </View>
 
         <View style={[styles.card, styles.licenseCard]}>
-            <Text style={styles.licenseTitle}>Licencia de Conducir</Text>
+            <Text style={styles.licenseTitle}>Driver license</Text>
             {usuario.license ? (
             <TouchableOpacity onPress={() => Linking.openURL(usuario.license)}>
                 <Image source={{ uri: usuario.license }} style={styles.licenseImage} />
             </TouchableOpacity>
             ) : (
-            <Text style={styles.noLicense}>Sin imagen de licencia</Text>
+            <Text style={styles.noLicense}>Without license image</Text>
             )}
         </View>
         </ScrollView>

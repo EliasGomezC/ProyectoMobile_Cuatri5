@@ -1,0 +1,44 @@
+Instrucciones para poder usar esto:
+
+    -Backend
+        *Comandos
+        cd Backend-ColdTruck
+        npm run dev
+
+        *Funcionamiento de cada carpeta y archivo
+            1. src/models : Aqui estan los esquemas que tenemos en la bd
+            se usa para cuando se vaya a realizar un insert no tener que volver
+            a definir cada vez que lo vayas a hacer.
+                Nota:
+                1. cada que hagas un model en la parte donde defines al model al final
+                el ultimo 'user' es el nombre de la coleccion donde quieres que se guarde o consulte
+                la info, por ello ponlo como esta en el Mongo la coleccion
+                 -- mongoose.model("User", UserSchema, 'user');
+                2. IMPORTANTE Siempre que quieras algo no lo puedes importar no te funcionara el import (solo en el Backend),
+                solo puedes crear una constante const y llamarlo con requiere() y asi lo importas
+
+
+            2. src/routes ahi estan las rutas get, post o put que realices
+            ahi se definen para ser llamadas en el archivo server.js
+
+            3. server.js es el punto central ahi se manda a llamar las cosas
+
+    - Frontend
+        *Comandos
+        cd ColdTruck
+        npm start (si te da error has primero el npm install)
+
+        *Conexion cuando corras el frontend te data tu IP
+        aqui: Metro waiting on exp://192.168.1.115:8081 justo
+        debajo del QR pa' el expo tomas la IP (192.168.1.115) y
+        lo colocas en el archivo ColdTruck/conexion.js (obviamente quitas
+        el que esta y pones el tuyo).
+                -Esto es porque en mobile no podemos usar el localhost entonces se
+                usa la IP del WIFI C:
+
+        *Funcionamiento de cada carpeta y archivo
+            1. Como vamos a usar en mobile solo el driver pues... solo vamos a
+            src/screens/driver
+            Toda la info del usuario que inicio sesion se guarda automaticamente en el
+            AsyncStorage entonces manda importala cada vez que la necesites con este comando
+                import AsyncStorage from '@react-native-async-storage/async-storage';
